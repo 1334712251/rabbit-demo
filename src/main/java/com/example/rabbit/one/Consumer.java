@@ -31,8 +31,8 @@ public class Consumer {
          * 消费者消费信息
          * 1.消费哪个队列
          * 2.消费者成功之后是否要自动应答，true：自动应答，false：手动应答
-         * 3：消费者未成功消费的回调
-         * 4.消费者取消消费的回调
+         * 3：消费者成功消费信息的回调
+         * 4.消费者取消消费信息的回调
          */
         channel.basicConsume(QUEUE_NAME,true,deliverCallback,cancelCallback);
 
