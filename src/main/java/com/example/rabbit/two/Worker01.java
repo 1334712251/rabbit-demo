@@ -19,12 +19,12 @@ public class Worker01 {
              * 2.是否批量应答未应答消息
              */
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
-
+            System.out.println("应答消息:" + receivedMessage);
         };
 
         CancelCallback cancelCallback = (consumerTag) -> {
