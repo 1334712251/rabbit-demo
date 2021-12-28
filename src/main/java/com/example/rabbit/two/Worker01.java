@@ -14,12 +14,24 @@ public class Worker01 {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String receivedMessage = new String(delivery.getBody());
             System.out.println("接收到消息:" + receivedMessage);
+            /**
+             * 1.消息标记 tag
+             * 2.是否批量应答未应答消息
+             */
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
+
         };
 
         CancelCallback cancelCallback = (consumerTag) -> {
             System.out.println(consumerTag + "消费者取消消费接口回调逻辑");
         };
+
         System.out.println("C2 消费者启动等待消费.................. ");
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, cancelCallback);
+        channel.basicConsume(QUEUE_NAME, false, deliverCallback, cancelCallback);
     }
 }

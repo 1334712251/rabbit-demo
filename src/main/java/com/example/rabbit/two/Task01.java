@@ -3,6 +3,7 @@ package com.example.rabbit.two;
 import com.example.rabbit.utils.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Task01 {
@@ -15,7 +16,7 @@ public class Task01 {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String message = scanner.next();
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println("发送消息完成:" + message);
         }
     }
