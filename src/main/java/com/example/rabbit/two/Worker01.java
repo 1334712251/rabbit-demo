@@ -33,7 +33,9 @@ public class Worker01 {
 
         System.out.println("C2 消费者启动等待消费.................. ");
         //设置不公平分发
-        channel.basicQos(1);
+//        channel.basicQos(1);
+        //预期值是2，2以后都是预期值
+        channel.basicQos(2);
         channel.basicConsume(QUEUE_NAME, false, deliverCallback, cancelCallback);
     }
 }
