@@ -118,6 +118,7 @@ public class ConfirmMessage {
 
         AtomicInteger flag = new AtomicInteger();
         ConfirmCallback ackCallback = (sequenceNumber, multiple) -> {
+            System.out.println("标记为" + sequenceNumber + "是否批量" + multiple);
 //            System.out.println(flag.getAndIncrement());
 //            String message = outstandingConfirms.get(sequenceNumber);
 //            System.out.println("发布的消息" + message + "已被确认，序列号为" + sequenceNumber);
@@ -132,7 +133,7 @@ public class ConfirmMessage {
                 for (Long aLong : longs) {
                     String s = confirmed.get(aLong);
 //                    System.out.println("确认的消息" + s + "序号为" + aLong);
-                    System.out.println("标记为" + sequenceNumber + "序号为" + aLong);
+//                    System.out.println("标记为" + sequenceNumber + "序号为" + aLong);
                 }
                 //消除被批量确认的消息
                 confirmed.clear();
@@ -167,8 +168,8 @@ public class ConfirmMessage {
              */
             outstandingConfirms.put(channel.getNextPublishSeqNo(), message);
             channel.basicPublish("", queueName, null, message.getBytes());
-            System.out.println("序列号为" + channel.getNextPublishSeqNo());
-            System.out.println("序列号----为" + channel.getNextPublishSeqNo());
+//            System.out.println("序列号为" + channel.getNextPublishSeqNo());
+//            System.out.println("序列号----为" + channel.getNextPublishSeqNo());
         }
         long end = System.currentTimeMillis();
         System.out.println("发布" + MESSAGE_COUNT + "个异步确认消息,耗时" + (end - begin) + "ms");
