@@ -17,13 +17,13 @@ public class Consumer {
         System.out.println("等待接收消息.........");
 
         //推送的消息如何进行消费的接口回调
-        DeliverCallback deliverCallback = (consumerTag, delivery) ->{
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody());
             System.out.println(message);
         };
 
         //取消消费的一个回调接口 如在消费的时候队列被删除掉了
-        CancelCallback cancelCallback = (consumerTag) ->{
+        CancelCallback cancelCallback = (consumerTag) -> {
             System.out.println("消息消费被中断");
         };
 
@@ -34,7 +34,7 @@ public class Consumer {
          * 3：消费者成功消费信息的回调
          * 4.消费者取消消费信息的回调
          */
-        channel.basicConsume(QUEUE_NAME,true,deliverCallback,cancelCallback);
+        channel.basicConsume(QUEUE_NAME, true, deliverCallback, cancelCallback);
 
 
     }
